@@ -64,8 +64,8 @@ import tv.danmaku.ijk.media.player.misc.IjkMediaFormat;
 public class IjkVideoView extends FrameLayout implements MediaController.MediaPlayerControl {
     private String TAG = "IjkVideoView";
     // settable by the client
-    private Uri mUri;
-    private Map<String, String> mHeaders;
+    private Uri mUri; // 播放地址通过客户端可设置
+    private Map<String, String> mHeaders; // 播放器的一些基本配置
 
     // all possible internal states
     private static final int STATE_ERROR = -1;
@@ -86,19 +86,19 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
 
     // All the stuff we need for playing and showing a video
     private IRenderView.ISurfaceHolder mSurfaceHolder = null;
-    private IMediaPlayer mMediaPlayer = null;
+    private IMediaPlayer mMediaPlayer = null; // 媒体播放器
     // private int         mAudioSession;
-    private int mVideoWidth;
-    private int mVideoHeight;
-    private int mSurfaceWidth;
-    private int mSurfaceHeight;
-    private int mVideoRotationDegree;
-    private IMediaController mMediaController;
-    private IMediaPlayer.OnCompletionListener mOnCompletionListener;
-    private IMediaPlayer.OnPreparedListener mOnPreparedListener;
-    private int mCurrentBufferPercentage;
-    private IMediaPlayer.OnErrorListener mOnErrorListener;
-    private IMediaPlayer.OnInfoListener mOnInfoListener;
+    private int mVideoWidth; // 视频宽度
+    private int mVideoHeight; // 视频高度
+    private int mSurfaceWidth; // 窗口宽度
+    private int mSurfaceHeight; // 窗口高度
+    private int mVideoRotationDegree; // 视频旋转角度
+    private IMediaController mMediaController; // 媒体控制器
+    private IMediaPlayer.OnCompletionListener mOnCompletionListener; // 播放完成监听
+    private IMediaPlayer.OnPreparedListener mOnPreparedListener; // 播放准备监听
+    private int mCurrentBufferPercentage; // 缓存
+    private IMediaPlayer.OnErrorListener mOnErrorListener; // 播放错误监听
+    private IMediaPlayer.OnInfoListener mOnInfoListener; // 播放其他信息监听
     private int mSeekWhenPrepared;  // recording the seek position while preparing
     private boolean mCanPause = true;
     private boolean mCanSeekBack = true;
@@ -154,6 +154,7 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
     // REMOVED: onInitializeAccessibilityNodeInfo
     // REMOVED: resolveAdjustedSize
 
+    // 初始化视频view
     private void initVideoView(Context context) {
         mAppContext = context.getApplicationContext();
         mSettings = new Settings(mAppContext);
@@ -300,6 +301,7 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
         }
     }
 
+    // 打开视频
     @TargetApi(Build.VERSION_CODES.M)
     private void openVideo() {
         if (mUri == null || mSurfaceHolder == null) {
@@ -322,11 +324,17 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
             // REMOVED: SubtitleController
 
             // REMOVED: mAudioSession
+            /**视频准备播放监听*/
             mMediaPlayer.setOnPreparedListener(mPreparedListener);
+            /**视频界面大小改变监听*/
             mMediaPlayer.setOnVideoSizeChangedListener(mSizeChangedListener);
+            /**视频播放完成监听*/
             mMediaPlayer.setOnCompletionListener(mCompletionListener);
+            /**视频错误监听*/
             mMediaPlayer.setOnErrorListener(mErrorListener);
+            /**视频其他信息监听*/
             mMediaPlayer.setOnInfoListener(mInfoListener);
+            /**视频缓冲监听*/
             mMediaPlayer.setOnBufferingUpdateListener(mBufferingUpdateListener);
             mMediaPlayer.setOnSeekCompleteListener(mSeekCompleteListener);
             mMediaPlayer.setOnTimedTextListener(mOnTimedTextListener);
@@ -939,6 +947,7 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
     private int mCurrentRenderIndex = 0;
     private int mCurrentRender = RENDER_NONE;
 
+    // 初始化渲染器
     private void initRenders() {
         mAllRenders.clear();
 

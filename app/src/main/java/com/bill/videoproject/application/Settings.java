@@ -52,11 +52,13 @@ public class Settings {
         }
     }
 
+    // 使用编解码器硬编码还是软编码，true 硬编码 false 为软编码
     public boolean getUsingMediaCodec() {
         String key = mAppContext.getString(R.string.pref_key_using_media_codec);
         return mSharedPreferences.getBoolean(key, false);
     }
 
+    // 使用编解码是否自转
     public boolean getUsingMediaCodecAutoRotate() {
         String key = mAppContext.getString(R.string.pref_key_using_media_codec_auto_rotate);
         return mSharedPreferences.getBoolean(key, false);
