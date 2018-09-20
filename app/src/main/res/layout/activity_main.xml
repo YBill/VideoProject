@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#999999"
     tools:context="com.bill.videoproject.MainActivity">
 
     <com.bill.videoproject.widget.media.IjkVideoView
         android:id="@+id/video_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="#ff0000" />
 
     <TableLayout
         android:id="@+id/hud_view"

@@ -116,6 +116,10 @@ public class SurfaceRenderView extends SurfaceView implements IRenderView {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         mMeasureHelper.doMeasure(widthMeasureSpec, heightMeasureSpec);
         setMeasuredDimension(mMeasureHelper.getMeasuredWidth(), mMeasureHelper.getMeasuredHeight());
+//
+//        int width = getDefaultSize(getWidth(), widthMeasureSpec);
+//        int height = getDefaultSize(getHeight(), heightMeasureSpec);
+//        setMeasuredDimension(width, height);
     }
 
     //--------------------
