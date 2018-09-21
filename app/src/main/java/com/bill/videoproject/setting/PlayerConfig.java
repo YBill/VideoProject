@@ -2,7 +2,6 @@ package com.bill.videoproject.setting;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.bill.videoproject.R;
 import com.bill.videoproject.application.MyApplication;
@@ -45,20 +44,18 @@ public class PlayerConfig {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putBoolean(key, enable);
         mCompat.apply(editor);
-
-        Log.e("Bill", "++::" + getEnableBackgroundPlay());
     }
 
     public @PlayerType
     int getPlayer() {
         String key = mAppContext.getString(R.string.pref_key_player);
-        String value = mSharedPreferences.getString(key, "");
+        int value = mSharedPreferences.getInt(key, 0);
 
-        if ("1".equals(value)) {
+        if (value == 1) {
             return PlayerType.PV_PLAYER__AndroidMediaPlayer;
-        } else if ("2".equals(value)) {
+        } else if (value == 2) {
             return PlayerType.PV_PLAYER__IjkMediaPlayer;
-        } else if ("3".equals(value)) {
+        } else if (value == 3) {
             return PlayerType.PV_PLAYER__IjkExoMediaPlayer;
         } else {
             return PlayerType.PV_PLAYER__NONE;

@@ -20,7 +20,6 @@ package com.bill.videoproject.widget.media;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -37,7 +36,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.MediaController;
 
-import com.bill.videoproject.R;
 import com.bill.videoproject.services.MediaPlayerService;
 import com.bill.videoproject.setting.PlayerConfig;
 import com.bill.videoproject.setting.PlayerType;
@@ -393,6 +391,8 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
     IMediaPlayer.OnPreparedListener mPreparedListener = new IMediaPlayer.OnPreparedListener() {
         public void onPrepared(IMediaPlayer mp) {
             mPrepareEndTime = System.currentTimeMillis();
+            long mLoadCost = mPrepareEndTime - mPrepareStartTime;
+            Log.d(TAG, "mLoadCost:" + mLoadCost);
             mCurrentState = STATE_PREPARED;
 
             // Get the capabilities of the player for this stream
@@ -533,18 +533,17 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
                      * longer have a window, don't bother showing the user an error.
                      */
                     if (getWindowToken() != null) {
-                        Resources r = mAppContext.getResources();
-                        int messageId;
+                        String message;
 
                         if (framework_err == MediaPlayer.MEDIA_ERROR_NOT_VALID_FOR_PROGRESSIVE_PLAYBACK) {
-                            messageId = R.string.VideoView_error_text_invalid_progressive_playback;
+                            message = "Invalid progressive playback";
                         } else {
-                            messageId = R.string.VideoView_error_text_unknown;
+                            message = "Unknown";
                         }
 
                         new AlertDialog.Builder(getContext())
-                                .setMessage(messageId)
-                                .setPositiveButton(R.string.VideoView_error_button,
+                                .setMessage(message)
+                                .setPositiveButton("OK",
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int whichButton) {
                                                 /* If we get here, there is no onError listener, so
@@ -574,6 +573,8 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
         @Override
         public void onSeekComplete(IMediaPlayer mp) {
             mSeekEndTime = System.currentTimeMillis();
+            long mSeekCost = mSeekEndTime - mSeekStartTime;
+            Log.d(TAG, "mSeekCost: " + mSeekCost);
         }
     };
 
@@ -891,7 +892,7 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
             IRenderView.AR_ASPECT_FIT_PARENT,
             IRenderView.AR_ASPECT_FILL_PARENT,
             IRenderView.AR_ASPECT_WRAP_CONTENT,
-            // IRenderView.AR_MATCH_PARENT,
+             IRenderView.AR_MATCH_PARENT, //
             IRenderView.AR_16_9_FIT_PARENT,
             IRenderView.AR_4_3_FIT_PARENT};
     private int mCurrentAspectRatioIndex = 0;
@@ -942,26 +943,6 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
         mCurrentRender = mAllRenders.get(mCurrentRenderIndex);
         setRender(mCurrentRender);
         return mCurrentRender;
-    }
-
-    @NonNull
-    public static String getRenderText(Context context, int render) {
-        String text;
-        switch (render) {
-            case RENDER_NONE:
-                text = context.getString(R.string.VideoView_render_none);
-                break;
-            case RENDER_SURFACE_VIEW:
-                text = context.getString(R.string.VideoView_render_surface_view);
-                break;
-            case RENDER_TEXTURE_VIEW:
-                text = context.getString(R.string.VideoView_render_texture_view);
-                break;
-            default:
-                text = context.getString(R.string.N_A);
-                break;
-        }
-        return text;
     }
 
     //-------------------------
