@@ -3,12 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bill.videoproject.activity.MainActivity">
+    android:background="#999999"
+    tools:context="com.bill.videoproject.activity.VideoActivity">
 
-    <Button
+    <com.bill.videoproject.widget.media.IjkVideoView
+        android:id="@+id/video_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="handlePlayer"
-        android:text="Player" />
+        android:layout_gravity="center"
+        android:background="#ff0000" />
 
 </FrameLayout>
