@@ -15,8 +15,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void handlePlayer(View view) {
+    public void handleVideo(View view) {
         Intent intent = new Intent(this, VideoActivity.class);
+        startActivity(intent);
+    }
+
+    public void handleAudio(View view) {
+        Intent intent = new Intent(this, AudioActivity.class);
         startActivity(intent);
     }
 }
