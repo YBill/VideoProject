@@ -103,6 +103,13 @@ public class VideoActivity extends AppCompatActivity {
             mToastTextView.setText(playerText);
             mMediaController.showOnce(mToastTextView);
             return true;
+        } else if (id == R.id.action_toggle_render) {
+//            int render = mVideoView.toggleRender();
+            int render = PlayerConfig.getInstance().getRender();
+            String renderText = PlayerText.getRenderText(render);
+            mToastTextView.setText(renderText);
+            mMediaController.showOnce(mToastTextView);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

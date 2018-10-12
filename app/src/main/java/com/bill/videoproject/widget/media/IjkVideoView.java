@@ -39,12 +39,10 @@ import android.widget.MediaController;
 import com.bill.videoproject.services.MediaPlayerService;
 import com.bill.videoproject.setting.PlayerConfig;
 import com.bill.videoproject.setting.PlayerType;
+import com.bill.videoproject.setting.RenderType;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import tv.danmaku.ijk.media.exo.IjkExoMediaPlayer;
@@ -199,10 +197,10 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
 
     public void setRender(int render) {
         switch (render) {
-            case RENDER_NONE:
+            case RenderType.RENDER_NONE_VIEW:
                 setRenderView(null);
                 break;
-            case RENDER_TEXTURE_VIEW: {
+            case RenderType.RENDER_TEXTURE_VIEW: {
                 TextureRenderView renderView = new TextureRenderView(getContext());
                 if (mMediaPlayer != null) {
                     renderView.getSurfaceHolder().bindToMediaPlayer(mMediaPlayer);
@@ -213,14 +211,12 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
                 setRenderView(renderView);
                 break;
             }
-            case RENDER_SURFACE_VIEW: {
+            case RenderType.RENDER_SURFACE_VIEW:
+            default: {
                 SurfaceRenderView renderView = new SurfaceRenderView(getContext());
                 setRenderView(renderView);
                 break;
             }
-            default:
-                Log.e(TAG, String.format(Locale.getDefault(), "invalid render %d\n", render));
-                break;
         }
     }
 
@@ -892,7 +888,7 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
             IRenderView.AR_ASPECT_FIT_PARENT,
             IRenderView.AR_ASPECT_FILL_PARENT,
             IRenderView.AR_ASPECT_WRAP_CONTENT,
-             IRenderView.AR_MATCH_PARENT, //
+            IRenderView.AR_MATCH_PARENT, //
             IRenderView.AR_16_9_FIT_PARENT,
             IRenderView.AR_4_3_FIT_PARENT};
     private int mCurrentAspectRatioIndex = 0;
@@ -908,39 +904,14 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
         return mCurrentAspectRatio;
     }
 
-    //-------------------------
-    // Extend: Render
-    //-------------------------
-    public static final int RENDER_NONE = 0;
-    public static final int RENDER_SURFACE_VIEW = 1;
-    public static final int RENDER_TEXTURE_VIEW = 2;
-
-    private List<Integer> mAllRenders = new ArrayList<Integer>();
-    private int mCurrentRenderIndex = 0;
-    private int mCurrentRender = RENDER_NONE;
-
     // 初始化渲染器
     private void initRenders() {
-        mAllRenders.clear();
-
-        if (PlayerConfig.getInstance().getEnableSurfaceView())
-            mAllRenders.add(RENDER_SURFACE_VIEW);
-        if (PlayerConfig.getInstance().getEnableTextureView() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-            mAllRenders.add(RENDER_TEXTURE_VIEW);
-        if (PlayerConfig.getInstance().getEnableNoView())
-            mAllRenders.add(RENDER_NONE);
-
-        if (mAllRenders.isEmpty())
-            mAllRenders.add(RENDER_SURFACE_VIEW);
-        mCurrentRender = mAllRenders.get(mCurrentRenderIndex);
+        int mCurrentRender = PlayerConfig.getInstance().getRender();
         setRender(mCurrentRender);
     }
 
     public int toggleRender() {
-        mCurrentRenderIndex++;
-        mCurrentRenderIndex %= mAllRenders.size();
-
-        mCurrentRender = mAllRenders.get(mCurrentRenderIndex);
+        int mCurrentRender = PlayerConfig.getInstance().getRender();
         setRender(mCurrentRender);
         return mCurrentRender;
     }

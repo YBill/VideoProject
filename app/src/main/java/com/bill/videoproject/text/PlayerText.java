@@ -3,8 +3,8 @@ package com.bill.videoproject.text;
 import android.support.annotation.NonNull;
 
 import com.bill.videoproject.setting.PlayerType;
+import com.bill.videoproject.setting.RenderType;
 import com.bill.videoproject.widget.media.IRenderView;
-import com.bill.videoproject.widget.media.IjkVideoView;
 
 public class PlayerText {
     @NonNull
@@ -60,13 +60,13 @@ public class PlayerText {
     public static String getRenderText(int render) {
         String text;
         switch (render) {
-            case IjkVideoView.RENDER_NONE:
-                text = "Render: None";
+            case RenderType.RENDER_NONE_VIEW:
+                text = "Render: None View";
                 break;
-            case IjkVideoView.RENDER_SURFACE_VIEW:
+            case RenderType.RENDER_SURFACE_VIEW:
                 text = "Render: SurfaceView";
                 break;
-            case IjkVideoView.RENDER_TEXTURE_VIEW:
+            case RenderType.RENDER_TEXTURE_VIEW:
                 text = "Render: TextureView";
                 break;
             default:

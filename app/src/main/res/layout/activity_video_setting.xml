@@ -56,9 +56,34 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Player"
+                android:text="Render"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
+            <RadioGroup
+                android:id="@+id/render_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/surface_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="SurfaceView" />
+
+                <RadioButton
+                    android:id="@+id/texture_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextureView" />
+
+                <RadioButton
+                    android:id="@+id/no_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NOView" />
+
+            </RadioGroup>
 
         </LinearLayout>
     </ScrollView>

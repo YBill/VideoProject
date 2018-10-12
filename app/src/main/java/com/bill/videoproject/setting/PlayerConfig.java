@@ -62,6 +62,29 @@ public class PlayerConfig {
         }
     }
 
+    public void setRender(@RenderType int type) {
+        String key = mAppContext.getString(R.string.pref_key_render);
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putInt(key, type);
+        mCompat.apply(editor);
+    }
+
+    public @RenderType
+    int getRender() {
+        String key = mAppContext.getString(R.string.pref_key_render);
+        int value = mSharedPreferences.getInt(key, 0);
+
+        if (value == 1) {
+            return RenderType.RENDER_SURFACE_VIEW;
+        } else if (value == 2) {
+            return RenderType.RENDER_TEXTURE_VIEW;
+        } else if (value == 3) {
+            return RenderType.RENDER_NONE_VIEW;
+        } else {
+            return RenderType.RENDER_NONE;
+        }
+    }
+
     public void setPlayer(@PlayerType int type) {
         String key = mAppContext.getString(R.string.pref_key_player);
         SharedPreferences.Editor editor = mSharedPreferences.edit();
@@ -143,51 +166,6 @@ public class PlayerConfig {
         String key = mAppContext.getString(R.string.pref_key_pixel_format);
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putString(key, type);
-        mCompat.apply(editor);
-    }
-
-    /**
-     * @return
-     */
-    public boolean getEnableNoView() {
-        String key = mAppContext.getString(R.string.pref_key_enable_no_view);
-        return mSharedPreferences.getBoolean(key, false);
-    }
-
-    public void setEnableNoView(boolean enable) {
-        String key = mAppContext.getString(R.string.pref_key_enable_no_view);
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putBoolean(key, enable);
-        mCompat.apply(editor);
-    }
-
-    /**
-     * @return
-     */
-    public boolean getEnableSurfaceView() {
-        String key = mAppContext.getString(R.string.pref_key_enable_surface_view);
-        return mSharedPreferences.getBoolean(key, false);
-    }
-
-    public void setEnableSurfaceView(boolean enable) {
-        String key = mAppContext.getString(R.string.pref_key_enable_surface_view);
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putBoolean(key, enable);
-        mCompat.apply(editor);
-    }
-
-    /**
-     * @return
-     */
-    public boolean getEnableTextureView() {
-        String key = mAppContext.getString(R.string.pref_key_enable_texture_view);
-        return mSharedPreferences.getBoolean(key, false);
-    }
-
-    public void setEnableTextureView(boolean enable) {
-        String key = mAppContext.getString(R.string.pref_key_enable_texture_view);
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putBoolean(key, enable);
         mCompat.apply(editor);
     }
 

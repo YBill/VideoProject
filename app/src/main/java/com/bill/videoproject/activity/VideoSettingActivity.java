@@ -9,10 +9,12 @@ import android.widget.RadioGroup;
 import com.bill.videoproject.R;
 import com.bill.videoproject.setting.PlayerConfig;
 import com.bill.videoproject.setting.PlayerType;
+import com.bill.videoproject.setting.RenderType;
 
 public class VideoSettingActivity extends AppCompatActivity {
 
     private RadioGroup mPlayerTypeGroup;
+    private RadioGroup mRenderTypeGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +22,7 @@ public class VideoSettingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_video_setting);
 
         mPlayerTypeGroup = findViewById(R.id.player_type);
+        mRenderTypeGroup = findViewById(R.id.render_type);
 
     }
 
@@ -34,6 +37,17 @@ public class VideoSettingActivity extends AppCompatActivity {
                 break;
             case R.id.exo_player:
                 PlayerConfig.getInstance().setPlayer(PlayerType.PV_PLAYER__IjkExoMediaPlayer);
+                break;
+        }
+        switch (mRenderTypeGroup.getCheckedRadioButtonId()) {
+            case R.id.surface_view:
+                PlayerConfig.getInstance().setRender(RenderType.RENDER_SURFACE_VIEW);
+                break;
+            case R.id.texture_view:
+                PlayerConfig.getInstance().setRender(RenderType.RENDER_TEXTURE_VIEW);
+                break;
+            case R.id.no_view:
+                PlayerConfig.getInstance().setRender(RenderType.RENDER_NONE_VIEW);
                 break;
         }
 

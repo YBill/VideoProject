@@ -9,7 +9,7 @@ import java.lang.annotation.RetentionPolicy;
         PlayerType.PV_PLAYER__NONE,
         PlayerType.PV_PLAYER__AndroidMediaPlayer,
         PlayerType.PV_PLAYER__IjkMediaPlayer,
-        PlayerType.PV_PLAYER__IjkExoMediaPlayer,
+        PlayerType.PV_PLAYER__IjkExoMediaPlayer
 })
 @Retention(RetentionPolicy.SOURCE)
 public @interface PlayerType {
