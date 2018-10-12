@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.bill.videoproject.R;
 import com.bill.videoproject.setting.PlayerConfig;
-import com.bill.videoproject.setting.PlayerType;
 import com.bill.videoproject.text.PlayerText;
 import com.bill.videoproject.widget.media.AndroidMediaController;
 import com.bill.videoproject.widget.media.IjkVideoView;
@@ -98,8 +97,8 @@ public class VideoActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_toggle_player) {
-            PlayerConfig.getInstance().setPlayer(PlayerType.PV_PLAYER__AndroidMediaPlayer);
-            int player = mVideoView.togglePlayer();
+//            int player = mVideoView.togglePlayer();
+            int player = PlayerConfig.getInstance().getPlayer();
             String playerText = PlayerText.getPlayerText(player);
             mToastTextView.setText(playerText);
             mMediaController.showOnce(mToastTextView);

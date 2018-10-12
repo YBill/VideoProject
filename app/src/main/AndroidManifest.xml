@@ -19,8 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.VideoActivity"></activity>
-        <activity android:name=".activity.AudioActivity"></activity>
+        <activity android:name=".activity.VideoActivity" />
+        <activity android:name=".activity.AudioActivity" />
+        <activity android:name=".activity.VideoSettingActivity"></activity>
     </application>
 
 </manifest>
