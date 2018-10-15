@@ -50,16 +50,14 @@ public class PlayerConfig {
     int getPlayer() {
         String key = mAppContext.getString(R.string.pref_key_player);
         int value = mSharedPreferences.getInt(key, 0);
+        return value;
+    }
 
-        if (value == 1) {
-            return PlayerType.PV_PLAYER__AndroidMediaPlayer;
-        } else if (value == 2) {
-            return PlayerType.PV_PLAYER__IjkMediaPlayer;
-        } else if (value == 3) {
-            return PlayerType.PV_PLAYER__IjkExoMediaPlayer;
-        } else {
-            return PlayerType.PV_PLAYER__NONE;
-        }
+    public void setPlayer(@PlayerType int type) {
+        String key = mAppContext.getString(R.string.pref_key_player);
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putInt(key, type);
+        mCompat.apply(editor);
     }
 
     public void setRender(@RenderType int type) {
@@ -73,24 +71,23 @@ public class PlayerConfig {
     int getRender() {
         String key = mAppContext.getString(R.string.pref_key_render);
         int value = mSharedPreferences.getInt(key, 0);
-
-        if (value == 1) {
-            return RenderType.RENDER_SURFACE_VIEW;
-        } else if (value == 2) {
-            return RenderType.RENDER_TEXTURE_VIEW;
-        } else if (value == 3) {
-            return RenderType.RENDER_NONE_VIEW;
-        } else {
-            return RenderType.RENDER_NONE;
-        }
+        return value;
     }
 
-    public void setPlayer(@PlayerType int type) {
-        String key = mAppContext.getString(R.string.pref_key_player);
+    public void setScale(@ScaleType int type) {
+        String key = mAppContext.getString(R.string.pref_key_scale);
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putInt(key, type);
         mCompat.apply(editor);
     }
+
+    public @ScaleType
+    int getScale() {
+        String key = mAppContext.getString(R.string.pref_key_scale);
+        int value = mSharedPreferences.getInt(key, 0);
+        return value;
+    }
+
 
     /**
      * 使用编解码器硬编码还是软编码

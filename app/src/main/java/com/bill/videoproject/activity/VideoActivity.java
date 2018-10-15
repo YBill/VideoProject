@@ -97,17 +97,21 @@ public class VideoActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_toggle_player) {
-//            int player = mVideoView.togglePlayer();
-            int player = PlayerConfig.getInstance().getPlayer();
+            int player = mVideoView.togglePlayer();
             String playerText = PlayerText.getPlayerText(player);
             mToastTextView.setText(playerText);
             mMediaController.showOnce(mToastTextView);
             return true;
         } else if (id == R.id.action_toggle_render) {
-//            int render = mVideoView.toggleRender();
-            int render = PlayerConfig.getInstance().getRender();
+            int render = mVideoView.toggleRender();
             String renderText = PlayerText.getRenderText(render);
             mToastTextView.setText(renderText);
+            mMediaController.showOnce(mToastTextView);
+            return true;
+        } else if (id == R.id.action_toggle_ratio) {
+            int aspectRatio = mVideoView.toggleAspectRatio();
+            String aspectRatioText = PlayerText.getAspectRatioText(aspectRatio);
+            mToastTextView.setText(aspectRatioText);
             mMediaController.showOnce(mToastTextView);
             return true;
         }

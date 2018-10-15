@@ -85,6 +85,101 @@
 
             </RadioGroup>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Scale"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <RadioGroup
+                android:id="@+id/scale_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/fit_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Aspect / Fit Parent" />
+
+                <RadioButton
+                    android:id="@+id/fill_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Aspect / Fill Parent" />
+
+                <RadioButton
+                    android:id="@+id/wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Aspect / Wrap Content" />
+
+
+                <RadioButton
+                    android:id="@+id/match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Free / Fill Parent" />
+
+                <RadioButton
+                    android:id="@+id/fit_parent_16_9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="16:9 / Fit Parent" />
+
+                <RadioButton
+                    android:id="@+id/wrap_content_4_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4:3 / Fit Parent" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pixel Format"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <RadioGroup
+                android:id="@+id/pixel_format_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/rgb_565"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="RGB 565" />
+
+                <RadioButton
+                    android:id="@+id/rgb_888"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RGB 888" />
+
+                <RadioButton
+                    android:id="@+id/rgbx_8888"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RGBX 8888" />
+
+
+                <RadioButton
+                    android:id="@+id/yv12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="YV12" />
+
+                <RadioButton
+                    android:id="@+id/opengl_es2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="OpenGL ES2" />
+
+            </RadioGroup>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

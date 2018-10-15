@@ -19,6 +19,8 @@ package com.bill.videoproject.widget.media;
 
 import android.view.View;
 
+import com.bill.videoproject.setting.ScaleType;
+
 import java.lang.ref.WeakReference;
 
 
@@ -35,7 +37,7 @@ public final class MeasureHelper {
     private int mMeasuredWidth;
     private int mMeasuredHeight;
 
-    private int mCurrentAspectRatio = IRenderView.AR_ASPECT_FIT_PARENT;
+    private int mCurrentAspectRatio;
 
     public MeasureHelper(View view) {
         mWeakView = new WeakReference<View>(view);
@@ -78,7 +80,7 @@ public final class MeasureHelper {
 
         int width = View.getDefaultSize(mVideoWidth, widthMeasureSpec);
         int height = View.getDefaultSize(mVideoHeight, heightMeasureSpec);
-        if (mCurrentAspectRatio == IRenderView.AR_MATCH_PARENT) {
+        if (mCurrentAspectRatio == ScaleType.AR_MATCH_PARENT) {
             width = widthMeasureSpec;
             height = heightMeasureSpec;
         } else if (mVideoWidth > 0 && mVideoHeight > 0) {
@@ -91,19 +93,19 @@ public final class MeasureHelper {
                 float specAspectRatio = (float) widthSpecSize / (float) heightSpecSize;
                 float displayAspectRatio;
                 switch (mCurrentAspectRatio) {
-                    case IRenderView.AR_16_9_FIT_PARENT:
+                    case ScaleType.AR_16_9_FIT_PARENT:
                         displayAspectRatio = 16.0f / 9.0f;
                         if (mVideoRotationDegree == 90 || mVideoRotationDegree == 270)
                             displayAspectRatio = 1.0f / displayAspectRatio;
                         break;
-                    case IRenderView.AR_4_3_FIT_PARENT:
+                    case ScaleType.AR_4_3_FIT_PARENT:
                         displayAspectRatio = 4.0f / 3.0f;
                         if (mVideoRotationDegree == 90 || mVideoRotationDegree == 270)
                             displayAspectRatio = 1.0f / displayAspectRatio;
                         break;
-                    case IRenderView.AR_ASPECT_FIT_PARENT:
-                    case IRenderView.AR_ASPECT_FILL_PARENT:
-                    case IRenderView.AR_ASPECT_WRAP_CONTENT:
+                    case ScaleType.AR_ASPECT_FIT_PARENT:
+                    case ScaleType.AR_ASPECT_FILL_PARENT:
+                    case ScaleType.AR_ASPECT_WRAP_CONTENT:
                     default:
                         displayAspectRatio = (float) mVideoWidth / (float) mVideoHeight;
                         if (mVideoSarNum > 0 && mVideoSarDen > 0)
@@ -113,9 +115,9 @@ public final class MeasureHelper {
                 boolean shouldBeWider = displayAspectRatio > specAspectRatio;
 
                 switch (mCurrentAspectRatio) {
-                    case IRenderView.AR_ASPECT_FIT_PARENT:
-                    case IRenderView.AR_16_9_FIT_PARENT:
-                    case IRenderView.AR_4_3_FIT_PARENT:
+                    case ScaleType.AR_ASPECT_FIT_PARENT:
+                    case ScaleType.AR_16_9_FIT_PARENT:
+                    case ScaleType.AR_4_3_FIT_PARENT:
                         if (shouldBeWider) {
                             // too wide, fix width
                             width = widthSpecSize;
@@ -126,7 +128,7 @@ public final class MeasureHelper {
                             width = (int) (height * displayAspectRatio);
                         }
                         break;
-                    case IRenderView.AR_ASPECT_FILL_PARENT:
+                    case ScaleType.AR_ASPECT_FILL_PARENT:
                         if (shouldBeWider) {
                             // not high enough, fix height
                             height = heightSpecSize;
@@ -137,7 +139,7 @@ public final class MeasureHelper {
                             height = (int) (width / displayAspectRatio);
                         }
                         break;
-                    case IRenderView.AR_ASPECT_WRAP_CONTENT:
+                    case ScaleType.AR_ASPECT_WRAP_CONTENT:
                     default:
                         if (shouldBeWider) {
                             // too wide, fix width
