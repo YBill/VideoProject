@@ -21,7 +21,9 @@
         </activity>
         <activity android:name=".activity.VideoActivity" />
         <activity android:name=".activity.AudioActivity" />
-        <activity android:name=".activity.VideoSettingActivity"></activity>
+        <activity android:name=".activity.VideoSettingActivity" />
+        <activity android:name=".activity.VideoListActivity" />
+        <activity android:name=".activity.VideoDetailActivity"></activity>
     </application>
 
 </manifest>
