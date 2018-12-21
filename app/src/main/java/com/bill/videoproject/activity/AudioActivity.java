@@ -118,7 +118,8 @@ public class AudioActivity extends AppCompatActivity {
             ijkMediaPlayer = new IjkMediaPlayer();
 //        ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "start-on-prepared", 0);
             ijkMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-            ijkMediaPlayer.setDataSource("https://rmrbtest-image.peopleapp.com/upload/voice/201809/dee9aad0dcc97520f59d9960074077ad.mp3");
+//            ijkMediaPlayer.setDataSource("https://rmrbtest-image.peopleapp.com/upload/voice/201809/dee9aad0dcc97520f59d9960074077ad.mp3");
+            ijkMediaPlayer.setDataSource("https://read-test.oss-cn-beijing.aliyuncs.com/c4121578-5246-4187-b585-4c1bd3a83dfe.wav");
             ijkMediaPlayer.prepareAsync();
             startTimer();
             playStatus = 1;
